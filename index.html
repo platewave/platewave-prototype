@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +8,42 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
 
-:root {
-  --bg: #0a0a0a;
-  --bg2: #111111;
-  --bg3: #161616;
-  --border: #222222;
-  --text: #e8e8e8;
-  --muted: #555555;
-  --neon: #00ff88;
-  --neon2: #ff006e;
-  --neon3: #7c3aed;
-  --mono: 'IBM Plex Mono', monospace;
-  --sans: 'IBM Plex Sans', sans-serif;
+/* ── DARK MODE TOKENS ── */
+[data-theme="dark"] {
+  --bg:       #0a0a0a;
+  --bg2:      #111111;
+  --bg3:      #161616;
+  --border:   #2a2a2a;
+  --text:     #f0f0f0;
+  --text2:    #b0b0b0;
+  --muted:    #666666;
+  --neon:     #00ff88;
+  --tag-bg:   rgba(0,255,136,0.07);
+  --stat-bg:  #161616;
+  --shuffle-color: #888888;
 }
 
-body { background: var(--bg); color: var(--text); font-family: var(--sans); }
+/* ── LIGHT MODE TOKENS ── */
+[data-theme="light"] {
+  --bg:       #fafaf8;
+  --bg2:      #f0f0ec;
+  --bg3:      #e8e8e4;
+  --border:   #d8d8d0;
+  --text:     #111111;
+  --text2:    #444444;
+  --muted:    #888888;
+  --neon:     #008a4a;
+  --tag-bg:   rgba(0,138,74,0.07);
+  --stat-bg:  #111111;
+  --shuffle-color: #666666;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  transition: background 0.2s, color 0.2s;
+}
 
 /* ── NAV ── */
 .pw { width: 100%; }
@@ -33,19 +54,20 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border);
+  gap: 12px;
 }
+.pw-nav-left { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .pw-logo {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
   letter-spacing: 2px;
-  text-transform: lowercase;
 }
 .pw-logo span { color: var(--neon); }
 .pw-moods { display: flex; gap: 4px; flex-wrap: wrap; }
 .pw-pill {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   padding: 4px 10px;
   border: 1px solid var(--border);
@@ -57,7 +79,23 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
   transition: all 0.15s;
 }
 .pw-pill:hover { border-color: var(--neon); color: var(--neon); }
-.pw-pill.active { border-color: var(--neon); color: var(--neon); background: rgba(0,255,136,0.07); }
+.pw-pill.active { border-color: var(--neon); color: var(--neon); background: var(--tag-bg); }
+
+/* ── MODE TOGGLE ── */
+.pw-mode-toggle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pw-mode-toggle:hover { border-color: var(--text2); color: var(--text2); }
 
 /* ── MUSIC PANEL ── */
 .pw-music {
@@ -68,7 +106,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 .pw-vibe-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .pw-vibe-dot { width: 6px; height: 6px; background: var(--neon); flex-shrink: 0; }
 .pw-vibe-title {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   color: var(--neon);
   letter-spacing: 1.5px;
@@ -76,27 +114,26 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 }
 .pw-vibe-desc {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text2);
   line-height: 1.6;
   margin-bottom: 14px;
   font-weight: 300;
 }
-.pw-spotify-wrap { position: relative; }
 .pw-spotify-wrap.loading { opacity: 0.4; transition: opacity 0.2s; }
 
-/* ── RECIPE PANEL ── */
+/* ── RECIPE ── */
 .pw-content { background: var(--bg); }
 .pw-recipe { padding: 20px 18px 0; }
 .pw-tag-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .pw-tag {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   padding: 3px 10px;
   border: 1px solid var(--neon);
   color: var(--neon);
   letter-spacing: 1.5px;
   text-transform: lowercase;
-  background: rgba(0,255,136,0.05);
+  background: var(--tag-bg);
 }
 .pw-tag-line { flex: 1; height: 1px; background: var(--border); }
 .pw-title {
@@ -109,7 +146,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 }
 .pw-desc {
   font-size: 13px;
-  color: var(--muted);
+  color: var(--text2);
   line-height: 1.6;
   margin-bottom: 18px;
   font-weight: 300;
@@ -117,7 +154,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 .pw-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-bottom: 24px; background: var(--border); }
 .pw-stat { background: var(--bg2); padding: 12px 10px; text-align: center; }
 .pw-stat-val {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 15px;
   font-weight: 500;
   color: var(--neon);
@@ -125,9 +162,9 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
   margin-bottom: 3px;
 }
 .pw-stat-lbl {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
-  color: var(--muted);
+  color: var(--text2);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -135,11 +172,11 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 /* ── SECTIONS ── */
 .pw-section { padding: 0 18px; margin-bottom: 20px; }
 .pw-slabel {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 2px;
-  color: var(--muted);
+  color: var(--text2);
   text-transform: uppercase;
   margin-bottom: 10px;
   display: flex;
@@ -157,7 +194,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 }
 .pw-ing:last-child { border-bottom: none; }
 .pw-ing-name { color: var(--text); font-weight: 300; }
-.pw-ing-qty { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.pw-ing-qty { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text2); }
 
 /* ── STEPS ── */
 .pw-steps { display: flex; flex-direction: column; }
@@ -168,7 +205,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
   cursor: pointer;
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
-  transition: background 0.15s;
 }
 .pw-step:last-child { border-bottom: none; }
 .pw-num {
@@ -176,7 +212,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
   height: 22px;
   border: 1px solid var(--border);
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   display: flex;
   align-items: center;
@@ -187,9 +223,9 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 .pw-num.active { border-color: var(--neon); color: var(--neon); }
 .pw-num.done { border-color: var(--border); color: var(--border); }
 .pw-step-txt { font-size: 13px; line-height: 1.6; color: var(--text); padding-top: 2px; font-weight: 300; }
-.pw-step-txt.done { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--border); }
+.pw-step-txt.done { color: var(--muted); text-decoration: line-through; }
 .pw-step-lbl {
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 9px;
   color: var(--neon);
   display: block;
@@ -199,15 +235,15 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 }
 
 /* ── FOOTER ── */
-.pw-footer { padding: 14px 18px; border-top: 1px solid var(--border); }
+.pw-footer { padding: 14px 18px; border-top: 1px solid var(--border); background: var(--bg); }
 .pw-shuffle {
   width: 100%;
   padding: 11px;
   border: 1px solid var(--border);
   background: transparent;
-  font-family: var(--mono);
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
-  color: var(--muted);
+  color: var(--shuffle-color);
   cursor: pointer;
   letter-spacing: 1px;
   transition: all 0.15s;
@@ -258,13 +294,16 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 <div class="pw">
 
   <div class="pw-nav">
-    <div class="pw-logo">plate<span>wave</span></div>
-    <div class="pw-moods">
-      <button class="pw-pill" data-mood="cozy">cozy</button>
-      <button class="pw-pill active" data-mood="upbeat">upbeat</button>
-      <button class="pw-pill" data-mood="romantic">romantic</button>
-      <button class="pw-pill" data-mood="focus">focus</button>
+    <div class="pw-nav-left">
+      <div class="pw-logo">plate<span>wave</span></div>
+      <div class="pw-moods">
+        <button class="pw-pill" data-mood="cozy">cozy</button>
+        <button class="pw-pill active" data-mood="upbeat">upbeat</button>
+        <button class="pw-pill" data-mood="romantic">romantic</button>
+        <button class="pw-pill" data-mood="focus">focus</button>
+      </div>
     </div>
+    <button class="pw-mode-toggle" id="mode-toggle">light mode</button>
   </div>
 
   <div class="pw-music">
@@ -333,34 +372,28 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); }
 
 </div>
 <script>
+// ── Mode toggle ────────────────────────────────────────────
+const html = document.documentElement;
+const toggle = document.getElementById('mode-toggle');
+toggle.addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  toggle.textContent = isDark ? 'dark mode' : 'light mode';
+});
+
+// ── Mood data ──────────────────────────────────────────────
 const moods = {
-  cozy: {
-    title: 'cozy kitchen energy',
-    desc: 'Warm, slow, and unhurried — like a Sunday afternoon with nowhere to be.',
-    playlist: '37i9dQZF1DX889U0CL85jj',
-  },
-  upbeat: {
-    title: 'upbeat kitchen energy',
-    desc: 'Bright and bouncy tracks to match the sizzle — nothing too slow, nothing too intense.',
-    playlist: '37i9dQZF1EVJHK7Q1TBABQ',
-  },
-  romantic: {
-    title: 'romantic kitchen energy',
-    desc: 'Smooth, warm, and a little candlelit — perfect for cooking for someone special.',
-    playlist: '37i9dQZF1DX9uKNf5jGX6m',
-  },
-  focus: {
-    title: 'focus kitchen energy',
-    desc: 'Clean and minimal, no lyrics — let the music fade into the background.',
-    playlist: '37i9dQZF1DWZeKCadgRdKQ',
-  },
+  cozy:     { title: 'cozy kitchen energy',     desc: 'Warm, slow, and unhurried — like a Sunday afternoon with nowhere to be.',                  playlist: '37i9dQZF1DX889U0CL85jj' },
+  upbeat:   { title: 'upbeat kitchen energy',   desc: 'Bright and bouncy tracks to match the sizzle — nothing too slow, nothing too intense.',    playlist: '37i9dQZF1EVJHK7Q1TBABQ' },
+  romantic: { title: 'romantic kitchen energy', desc: 'Smooth, warm, and a little candlelit — perfect for cooking for someone special.',           playlist: '37i9dQZF1DX9uKNf5jGX6m' },
+  focus:    { title: 'focus kitchen energy',    desc: 'Clean and minimal, no lyrics — let the music fade into the background.',                    playlist: '37i9dQZF1DWZeKCadgRdKQ' },
 };
 
-const player = document.getElementById('spotify-player');
+const player   = document.getElementById('spotify-player');
 const vibeTitle = document.getElementById('vibe-title');
-const vibeDesc = document.getElementById('vibe-desc');
-const moodTag = document.getElementById('mood-tag');
-const wrap = document.getElementById('spotify-wrap');
+const vibeDesc  = document.getElementById('vibe-desc');
+const moodTag   = document.getElementById('mood-tag');
+const wrap      = document.getElementById('spotify-wrap');
 
 document.querySelectorAll('.pw-pill').forEach(pill => {
   pill.addEventListener('click', () => {
@@ -370,14 +403,15 @@ document.querySelectorAll('.pw-pill').forEach(pill => {
     document.querySelectorAll('.pw-pill').forEach(p => p.classList.remove('active'));
     pill.classList.add('active');
     vibeTitle.textContent = data.title;
-    vibeDesc.textContent = data.desc;
-    moodTag.textContent = mood;
+    vibeDesc.textContent  = data.desc;
+    moodTag.textContent   = mood;
     wrap.classList.add('loading');
     player.src = `https://open.spotify.com/embed/playlist/${data.playlist}?utm_source=generator&theme=0`;
     player.onload = () => wrap.classList.remove('loading');
   });
 });
 
+// ── Step tracker ───────────────────────────────────────────
 let active = 0;
 const total = 5;
 function render() {
@@ -385,9 +419,9 @@ function render() {
     const n = document.getElementById('n'+i);
     const t = document.getElementById('t'+i);
     const l = document.getElementById('l'+i);
-    if (i < active) { n.className='pw-num done'; t.className='pw-step-txt done'; if(l) l.textContent=''; }
-    else if (i === active) { n.className='pw-num active'; t.className='pw-step-txt'; if(l) l.textContent='now'; }
-    else { n.className='pw-num'; t.className='pw-step-txt'; if(l) l.textContent=''; }
+    if (i < active)       { n.className='pw-num done';   t.className='pw-step-txt done'; if(l) l.textContent=''; }
+    else if (i === active) { n.className='pw-num active'; t.className='pw-step-txt';      if(l) l.textContent='now'; }
+    else                   { n.className='pw-num';        t.className='pw-step-txt';      if(l) l.textContent=''; }
   }
 }
 document.querySelectorAll('.pw-step').forEach(s => {
