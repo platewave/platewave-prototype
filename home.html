@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platewave — recipes that sound as good as they taste</title>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+:root {
+  --paper:    #f5f0e6;
+  --paper2:   #f0ebe0;
+  --bg:       #d8d3c8;
+  --ink:      #1c1814;
+  --ink2:     #7a7068;
+  --ink3:     #9a9088;
+  --rule:     #d0c8b8;
+  --rule2:    #e8e0d4;
+  --gold:     #c8a96e;
+  --terra:    #8b4a2a;
+  --brown:    #8b7355;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Times New Roman', Times, serif;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── NAV ── */
+.nav {
+  background: var(--ink);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 3px solid var(--gold);
+}
+.nav-left { display: flex; align-items: center; gap: 16px; }
+.logo { font-size: 18px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+.logo span { color: var(--gold); font-style: italic; font-weight: 400; }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.search-bar {
+  background: #2a2520;
+  border: 1px solid #3a3530;
+  color: var(--paper);
+  font-family: 'Inconsolata', monospace;
+  font-size: 10px;
+  padding: 5px 12px;
+  width: 180px;
+  letter-spacing: 0.5px;
+  outline: none;
+}
+.search-bar::placeholder { color: #6a6058; }
+.search-bar:focus { border-color: var(--gold); }
+
+/* ── MOOD BAR ── */
+.mood-bar {
+  background: var(--paper2);
+  padding: 8px 20px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.mood-label { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 1.5px; text-transform: uppercase; margin-right: 4px; }
+.pill {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  padding: 3px 10px;
+  border: 1px solid var(--rule);
+  color: var(--ink2);
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+.pill:hover { border-color: var(--brown); color: var(--brown); }
+.pill.active { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 600; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--paper);
+  padding: 32px 20px 24px;
+  border-bottom: 2px solid var(--ink);
+  text-align: center;
+}
+.hero-kicker {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  color: var(--brown);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.hero-kicker::before,
+.hero-kicker::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--rule); }
+.hero-title { font-size: 36px; font-weight: 700; color: var(--ink); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 10px; }
+.hero-title em { font-style: italic; color: var(--brown); }
+.hero-rule { width: 40px; height: 2px; background: var(--gold); margin: 12px auto; }
+.hero-sub { font-size: 14px; font-style: italic; color: var(--ink2); line-height: 1.6; max-width: 420px; margin: 0 auto; }
+
+/* ── RESULTS BAR ── */
+.results-bar {
+  background: var(--paper2);
+  padding: 6px 20px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.results-count { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  flex: 1;
+}
+@media (max-width: 640px)  { .grid { grid-template-columns: 1fr; } }
+@media (min-width: 641px) and (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── CARD ── */
+.card {
+  background: var(--paper);
+  cursor: pointer;
+  transition: background 0.12s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover { background: var(--paper2); }
+.card:hover .card-arrow { color: var(--brown); }
+
+.card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  background: var(--paper2);
+  filter: sepia(15%);
+}
+.card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--rule); }
+
+.card-tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 8px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border: 1px solid var(--terra);
+  color: var(--terra);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-block;
+  width: fit-content;
+}
+.card-tag.cozy    { border-color: #6d3a8a; color: #6d3a8a; }
+.card-tag.romantic{ border-color: #9b3060; color: #9b3060; }
+.card-tag.focus   { border-color: #2a5a7a; color: #2a5a7a; }
+
+.card-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.25; }
+.card-desc { font-size: 13px; font-style: italic; color: var(--ink2); line-height: 1.55; flex: 1; }
+.card-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; border-top: 1px solid var(--rule2); padding-top: 8px; }
+.card-time { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 0.5px; text-transform: uppercase; }
+.card-arrow { font-size: 12px; color: var(--rule); transition: color 0.12s; font-style: italic; }
+
+/* ── EMPTY STATE ── */
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--ink3);
+  font-family: 'Inconsolata', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: none;
+  background: var(--paper);
+  grid-column: 1 / -1;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 3px solid var(--gold);
+}
+.footer-logo { font-size: 13px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; opacity: 0.4; }
+.footer-logo span { color: var(--gold); font-style: italic; font-weight: 400; }
+.footer-note { font-family: 'Inconsolata', monospace; font-size: 9px; color: #6a6058; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── DESKTOP ── */
+@media (min-width: 768px) {
+  .hero { padding: 48px 28px 32px; }
+  .hero-title { font-size: 48px; }
+  .search-bar { width: 220px; }
+  .card-img { height: 170px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="/" class="logo">plate<span>wave</span></a>
+  </div>
+  <div class="nav-right">
+    <input class="search-bar" id="search" placeholder="search recipes..." type="text" autocomplete="off" />
+  </div>
+</nav>
+
+<!-- MOOD FILTER -->
+<div class="mood-bar">
+  <span class="mood-label">mood</span>
+  <button class="pill active" data-mood="all">all</button>
+  <button class="pill" data-mood="upbeat">upbeat</button>
+  <button class="pill" data-mood="cozy">cozy</button>
+  <button class="pill" data-mood="romantic">romantic</button>
+  <button class="pill" data-mood="focus">focus</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Platewave</div>
+  <div class="hero-title">recipes that <em>sound</em><br>as good as they taste</div>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Every recipe paired with a playlist that matches the vibe. Cook better. Discover music.</div>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="results-bar">
+  <div class="results-count" id="count">6 recipes</div>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid">
+
+  <a class="card" href="index.html" data-mood="upbeat" data-name="spicy coconut tomato soup" data-desc="bright bold surprising fast weeknight">
+    <img class="card-img" src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=360&fit=crop&q=75" alt="Spicy Coconut Tomato Soup" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag upbeat">upbeat</span>
+      <div class="card-name">Spicy Coconut Tomato Soup</div>
+      <div class="card-desc">Bright, bold, and a little surprising. Ready in 25 minutes.</div>
+      <div class="card-meta"><span class="card-time">25 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a class="card" href="#" data-mood="cozy" data-name="french onion soup" data-desc="slow warm rich classic cheese">
+    <img class="card-img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=360&fit=crop&q=75" alt="French Onion Soup" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag cozy">cozy</span>
+      <div class="card-name">French Onion Soup</div>
+      <div class="card-desc">Slow-cooked, deeply rich, and worth every minute.</div>
+      <div class="card-meta"><span class="card-time">55 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a class="card" href="#" data-mood="romantic" data-name="spaghetti aglio e olio" data-desc="elegant simple pasta garlic oil">
+    <img class="card-img" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=360&fit=crop&q=75" alt="Spaghetti Aglio e Olio" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag romantic">romantic</span>
+      <div class="card-name">Spaghetti Aglio e Olio</div>
+      <div class="card-desc">Elegant, simple, ready before the candles burn down.</div>
+      <div class="card-meta"><span class="card-time">20 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a class="card" href="#" data-mood="focus" data-name="chicken rice meal prep" data-desc="clean efficient batch weekly prep">
+    <img class="card-img" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&h=360&fit=crop&q=75" alt="Chicken Rice Meal Prep" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag focus">focus</span>
+      <div class="card-name">Chicken + Rice Meal Prep</div>
+      <div class="card-desc">Clean, efficient, covers you for the whole week.</div>
+      <div class="card-meta"><span class="card-time">40 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a class="card" href="#" data-mood="upbeat" data-name="crispy shrimp tacos" data-desc="crunchy fast fun weeknight taco">
+    <img class="card-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=360&fit=crop&q=75" alt="Crispy Shrimp Tacos" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag upbeat">upbeat</span>
+      <div class="card-name">Crispy Shrimp Tacos</div>
+      <div class="card-desc">Fast, crunchy, and impossible not to dance while making.</div>
+      <div class="card-meta"><span class="card-time">20 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <a class="card" href="#" data-mood="cozy" data-name="mushroom risotto" data-desc="earthy creamy comfort sunday rice">
+    <img class="card-img" src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&h=360&fit=crop&q=75" alt="Mushroom Risotto" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag cozy">cozy</span>
+      <div class="card-name">Mushroom Risotto</div>
+      <div class="card-desc">Earthy, creamy, the ultimate Sunday comfort food.</div>
+      <div class="card-meta"><span class="card-time">35 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+
+  <div class="empty" id="empty">no recipes found — try a different search or mood</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">plate<span>wave</span></div>
+  <div class="footer-note" id="footer-note">6 recipes · 4 moods</div>
+</footer>
+
+<script>
+let activeMood = 'all';
+
+document.querySelectorAll('.pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    activeMood = pill.dataset.mood;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    filter();
+  });
+});
+
+document.getElementById('search').addEventListener('input', filter);
+
+function filter() {
+  const q     = document.getElementById('search').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.card');
+  let   shown = 0;
+  cards.forEach(card => {
+    const moodOk   = activeMood === 'all' || card.dataset.mood === activeMood;
+    const searchOk = !q || card.dataset.name.includes(q) || card.dataset.desc.includes(q);
+    const visible  = moodOk && searchOk;
+    card.style.display = visible ? '' : 'none';
+    if (visible) shown++;
+  });
+  document.getElementById('count').textContent = shown + ' recipe' + (shown !== 1 ? 's' : '');
+  document.getElementById('footer-note').textContent = shown + ' recipes · 4 moods';
+  document.getElementById('empty').style.display = shown === 0 ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
