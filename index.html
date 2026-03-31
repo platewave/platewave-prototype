@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Platewave — Spicy Coconut Tomato Soup</title>
+<title>Platewave — recipes that sound as good as they taste</title>
 <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +33,7 @@ body {
 }
 
 /* ── NAV ── */
-.pw-nav {
+.nav {
   background: var(--ink);
   padding: 10px 20px;
   display: flex;
@@ -41,247 +41,221 @@ body {
   justify-content: space-between;
   border-bottom: 3px solid var(--gold);
   flex-shrink: 0;
+  position: sticky; top: 0; z-index: 10;
 }
-.pw-logo { font-size: 17px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
-.pw-logo span { color: var(--gold); font-style: italic; font-weight: 400; }
-.pw-moods { display: flex; gap: 4px; flex-wrap: wrap; }
-.pw-pill {
-  font-family: 'Inconsolata', monospace;
-  font-size: 9px; padding: 3px 9px;
-  border: 1px solid #3a3530; color: #6a6058;
-  background: transparent; cursor: pointer;
-  letter-spacing: 0.8px; text-transform: uppercase; transition: all 0.1s;
-}
-.pw-pill:hover { border-color: #6a6058; color: #b0a898; }
-.pw-pill.active { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 600; }
+.logo { font-size: 17px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; text-decoration: none; }
+.logo span { color: var(--gold); font-style: italic; font-weight: 400; }
 .nav-right { display: flex; align-items: center; gap: 8px; }
-.mode-btn {
-  font-family: 'Inconsolata', monospace; font-size: 9px; padding: 3px 9px;
-  border: 1px solid #3a3530; color: #6a6058; background: transparent;
-  cursor: pointer; letter-spacing: 0.8px; text-transform: uppercase;
+.search-bar {
+  background: #2a2520; border: 1px solid #3a3530; color: var(--paper);
+  font-family: 'Inconsolata', monospace; font-size: 10px; padding: 5px 12px;
+  width: 180px; letter-spacing: 0.5px; outline: none;
 }
+.search-bar::placeholder { color: #6a6058; }
+.search-bar:focus { border-color: var(--gold); }
 
-/* ── THREE-COLUMN HEADER ── */
-.pw-header-band {
-  background: var(--paper2);
-  border-bottom: 2px solid var(--ink);
-  flex-shrink: 0;
+/* ── MOOD BAR ── */
+.mood-bar {
+  background: var(--paper2); padding: 8px 20px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
 }
-.pw-col-vibe { padding: 14px 20px; border-bottom: 1px solid var(--rule); }
-.pw-vibe-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-.pw-vibe-line { width: 18px; height: 1px; background: var(--brown); flex-shrink: 0; }
-.pw-vibe-title { font-family: 'Inconsolata', monospace; font-size: 10px; color: var(--brown); letter-spacing: 1.5px; text-transform: uppercase; }
-.pw-vibe-desc { font-size: 13px; font-style: italic; color: var(--ink2); line-height: 1.5; margin-top: 3px; }
-.pw-col-image { border-bottom: 1px solid var(--rule); overflow: hidden; }
-.pw-dish-img { display: block; width: 100%; height: 180px; object-fit: cover; filter: sepia(10%); }
-.pw-col-embed { }
-.pw-spotify-wrap.loading { opacity: 0.4; transition: opacity 0.2s; }
-
-/* ── MAIN — single column ── */
-.pw-main { flex: 1; overflow-y: auto; padding: 20px 20px 0; }
-
-.pw-recipe-label { font-family: 'Inconsolata', monospace; font-size: 9px; letter-spacing: 2px; color: var(--ink3); text-transform: uppercase; margin-bottom: 5px; }
-.pw-title { font-size: 26px; font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.3px; }
-.pw-desc { font-size: 14px; font-style: italic; color: var(--ink2); line-height: 1.6; margin-bottom: 16px; }
-
-.pw-stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); margin-bottom: 22px; }
-.pw-stat { padding: 12px 8px; text-align: center; border-right: 1px solid var(--rule); }
-.pw-stat:last-child { border-right: none; }
-.pw-stat-val { font-size: 17px; font-weight: 700; color: var(--ink); display: block; }
-.pw-stat-lbl { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); margin-top: 3px; letter-spacing: 0.8px; text-transform: uppercase; }
-
-.pw-section { margin-bottom: 20px; }
-.pw-slabel {
-  font-family: 'Inconsolata', monospace; font-size: 10px; font-weight: 600;
-  letter-spacing: 1.5px; color: var(--brown); text-transform: uppercase;
-  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+.mood-label { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 1.5px; text-transform: uppercase; margin-right: 4px; }
+.pill {
+  font-family: 'Inconsolata', monospace; font-size: 9px; padding: 3px 10px;
+  border: 1px solid var(--rule); color: var(--ink2); background: transparent;
+  cursor: pointer; letter-spacing: 0.8px; text-transform: uppercase; transition: all 0.1s;
 }
-.pw-slabel::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+.pill:hover { border-color: var(--brown); color: var(--brown); }
+.pill.active { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 600; }
 
-.pw-ing { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--rule2); gap: 12px; }
-.pw-ing:last-child { border-bottom: none; }
-.pw-ing-name { font-size: 15px; color: var(--ink); }
-.pw-ing-qty { font-family: 'Inconsolata', monospace; font-size: 13px; color: var(--ink3); white-space: nowrap; }
-
-.pw-steps { display: flex; flex-direction: column; border: 1px solid var(--rule); }
-.pw-step { display: flex; align-items: flex-start; cursor: pointer; padding: 13px 12px; border-bottom: 1px solid var(--rule2); transition: background 0.1s; }
-.pw-step:last-child { border-bottom: none; }
-.pw-step:hover { background: var(--paper2); }
-.pw-num {
-  min-width: 28px; height: 24px; background: var(--rule2); color: var(--brown);
-  font-family: 'Inconsolata', monospace; font-size: 11px; font-weight: 600;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; border: 1px solid var(--rule); margin-right: 13px; margin-top: 2px;
+/* ── HERO ── */
+.hero {
+  background: var(--paper); padding: 36px 20px 28px;
+  border-bottom: 2px solid var(--ink); text-align: center;
 }
-.pw-num.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
-.pw-num.done { background: var(--paper2); color: #c8c0b0; border-color: var(--rule2); }
-.pw-step-txt { font-size: 15px; line-height: 1.7; color: var(--ink); padding-top: 2px; }
-.pw-step-txt.done { color: #c0b8a8; text-decoration: line-through; }
-.pw-step-lbl { font-family: 'Inconsolata', monospace; font-size: 9px; font-weight: 600; color: var(--brown); display: block; margin-bottom: 3px; letter-spacing: 1px; text-transform: uppercase; }
+.hero-kicker {
+  font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--brown);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.hero-kicker::before, .hero-kicker::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--rule); }
+.hero-title { font-size: 38px; font-weight: 700; color: var(--ink); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 10px; }
+.hero-title em { font-style: italic; color: var(--terra); }
+.hero-rule { width: 40px; height: 2px; background: var(--gold); margin: 12px auto; }
+.hero-sub { font-size: 15px; font-style: italic; color: var(--ink2); line-height: 1.6; max-width: 400px; margin: 0 auto; }
+
+/* ── RESULTS BAR ── */
+.results-bar {
+  background: var(--paper2); padding: 6px 20px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.results-count { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── GRID ── */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); flex: 1; }
+@media (max-width: 640px)  { .grid { grid-template-columns: 1fr; } }
+@media (min-width: 641px) and (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── CARD ── */
+.card {
+  background: var(--paper); cursor: pointer; transition: background 0.12s;
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+}
+.card:hover { background: var(--paper2); }
+.card:hover .card-arrow { color: var(--terra); }
+
+.card-img { width: 100%; height: 150px; object-fit: cover; display: block; background: var(--paper2); filter: sepia(10%); }
+.card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--rule); }
+
+.card-tag {
+  font-family: 'Inconsolata', monospace; font-size: 8px; font-weight: 600;
+  padding: 2px 7px; border: 1px solid var(--terra); color: var(--terra);
+  letter-spacing: 1px; text-transform: uppercase; display: inline-block; width: fit-content;
+}
+.card-tag.cozy    { border-color: #6d3a8a; color: #6d3a8a; }
+.card-tag.romantic{ border-color: #9b3060; color: #9b3060; }
+.card-tag.focus   { border-color: #2a5a7a; color: #2a5a7a; }
+
+.card-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.25; }
+.card-desc { font-size: 13px; font-style: italic; color: var(--ink2); line-height: 1.55; flex: 1; }
+.card-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; border-top: 1px solid var(--rule2); padding-top: 8px; }
+.card-time { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); letter-spacing: 0.5px; text-transform: uppercase; }
+.card-arrow { font-size: 12px; color: var(--rule); transition: color 0.12s; font-style: italic; }
+
+/* ── EMPTY ── */
+.empty { padding: 60px 20px; text-align: center; color: var(--ink3); font-family: 'Inconsolata', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; display: none; background: var(--paper); grid-column: 1 / -1; }
 
 /* ── FOOTER ── */
-.pw-footer { padding: 14px 20px; border-top: 2px solid var(--ink); flex-shrink: 0; background: var(--paper2); }
-.pw-shuffle {
-  width: 100%; padding: 11px; border: 1px solid var(--ink);
-  background: transparent; font-family: 'Times New Roman', Times, serif;
-  font-size: 14px; font-style: italic; color: var(--ink); cursor: pointer; transition: all 0.12s;
+.footer {
+  background: var(--ink); padding: 14px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 3px solid var(--gold);
 }
-.pw-shuffle:hover { background: var(--ink); color: var(--paper); }
-
-/* ── DESKTOP: three-column header, single-column body ── */
-@media (min-width: 768px) {
-  body { overflow: hidden; height: 100vh; }
-  .pw-main { overflow-y: auto; }
-
-  .pw-header-band {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: 232px;
-  }
-  .pw-col-vibe {
-    border-bottom: none; border-right: 1px solid var(--rule);
-    padding: 20px 24px; display: flex; flex-direction: column;
-    justify-content: center; gap: 6px; height: 100%;
-  }
-  .pw-col-image { border-bottom: none; border-right: 1px solid var(--rule); height: 232px; overflow: hidden; }
-  .pw-dish-img { width: 100%; height: 232px; object-fit: cover; }
-  .pw-col-embed { height: 232px; overflow: hidden; }
-  .pw-col-embed iframe { display: block; width: 100%; height: 232px; }
-
-  .pw-main { padding: 24px 32px 0; }
-  .pw-footer { padding: 14px 32px; }
-  .pw-title { font-size: 30px; }
-}
-@media (min-width: 1200px) {
-  .pw-main { padding: 28px 48px 0; }
-  .pw-footer { padding: 14px 48px; }
-  .pw-title { font-size: 34px; }
-}
-@media (min-width: 1600px) {
-  .pw-main { padding: 32px 64px 0; }
-  .pw-footer { padding: 14px 64px; }
-  .pw-title { font-size: 38px; }
-}
+.footer-logo { font-size: 13px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; opacity: 0.35; }
+.footer-logo span { color: var(--gold); font-style: italic; font-weight: 400; }
+.footer-note { font-family: 'Inconsolata', monospace; font-size: 9px; color: #6a6058; letter-spacing: 1px; text-transform: uppercase; }
 </style>
 </head>
 <body>
 
-<div class="pw-nav">
-  <a href="home.html" class="pw-logo">plate<span>wave</span></a>
+<nav class="nav">
+  <a href="home.html" class="logo">plate<span>wave</span></a>
   <div class="nav-right">
-    <div class="pw-moods">
-      <button class="pw-pill" data-mood="cozy">cozy</button>
-      <button class="pw-pill active" data-mood="upbeat">upbeat</button>
-      <button class="pw-pill" data-mood="romantic">romantic</button>
-      <button class="pw-pill" data-mood="focus">focus</button>
-    </div>
+    <input class="search-bar" id="search" placeholder="search recipes..." type="text" autocomplete="off" />
   </div>
+</nav>
+
+<div class="mood-bar">
+  <span class="mood-label">mood</span>
+  <button class="pill active" data-mood="all">all</button>
+  <button class="pill" data-mood="upbeat">upbeat</button>
+  <button class="pill" data-mood="cozy">cozy</button>
+  <button class="pill" data-mood="romantic">romantic</button>
+  <button class="pill" data-mood="focus">focus</button>
 </div>
 
-<div class="pw-header-band">
-  <div class="pw-col-vibe">
-    <div class="pw-vibe-row">
-      <div class="pw-vibe-line"></div>
-      <div class="pw-vibe-title" id="vibe-title">Upbeat kitchen energy</div>
-    </div>
-    <div class="pw-vibe-desc" id="vibe-desc">Bright and bouncy tracks to match the sizzle. Turn it up.</div>
-  </div>
-  <div class="pw-col-image">
-    <img class="pw-dish-img"
-      src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=900&h=500&fit=crop&q=85"
-      alt="Spicy Coconut Tomato Soup" onerror="this.parentElement.style.display='none'" />
-  </div>
-  <div class="pw-col-embed">
-    <div class="pw-spotify-wrap" id="spotify-wrap">
-      <iframe id="spotify-player" style="border-radius:0;display:block;"
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1EVJHK7Q1TBABQ?utm_source=generator&theme=0"
-        width="100%" height="232" frameBorder="0" allowfullscreen
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"></iframe>
-    </div>
-  </div>
+<div class="hero">
+  <div class="hero-kicker">Platewave</div>
+  <div class="hero-title">recipes that <em>sound</em><br>as good as they taste</div>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Every recipe paired with a playlist that matches the vibe. Cook better. Discover music.</div>
 </div>
 
-<div class="pw-main">
-  <div class="pw-recipe-label">Recipe</div>
-  <div class="pw-title">Spicy Coconut Tomato Soup</div>
-  <div class="pw-desc">Bright, bold, and a little surprising. Ready in 25 minutes with zero fuss.</div>
-  <div class="pw-stats">
-    <div class="pw-stat"><span class="pw-stat-val">5 min</span><span class="pw-stat-lbl">Prep</span></div>
-    <div class="pw-stat"><span class="pw-stat-val">20 min</span><span class="pw-stat-lbl">Cook</span></div>
-    <div class="pw-stat"><span class="pw-stat-val">2</span><span class="pw-stat-lbl">Serves</span></div>
-  </div>
-  <div class="pw-section">
-    <div class="pw-slabel">Ingredients</div>
-    <div class="pw-ing"><span class="pw-ing-name">Coconut milk</span><span class="pw-ing-qty">1 can · 400ml</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Crushed tomatoes</span><span class="pw-ing-qty">1 can · 400g</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Garlic cloves, minced</span><span class="pw-ing-qty">2 cloves</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Fresh ginger, grated</span><span class="pw-ing-qty">1 tbsp</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Red curry paste</span><span class="pw-ing-qty">1 tbsp</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Olive oil</span><span class="pw-ing-qty">1 tsp</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Brown sugar</span><span class="pw-ing-qty">1 tsp</span></div>
-    <div class="pw-ing"><span class="pw-ing-name">Cilantro + chili flakes</span><span class="pw-ing-qty">to serve</span></div>
-  </div>
-  <div class="pw-section">
-    <div class="pw-slabel">Steps</div>
-    <div class="pw-steps">
-      <div class="pw-step" data-i="0"><div class="pw-num active" id="n0">01</div><div class="pw-step-txt" id="t0"><span class="pw-step-lbl" id="l0">Now</span>Heat olive oil in a saucepan over medium heat. Add garlic and ginger, stir 1 minute until fragrant.</div></div>
-      <div class="pw-step" data-i="1"><div class="pw-num" id="n1">02</div><div class="pw-step-txt" id="t1"><span class="pw-step-lbl" id="l1"></span>Stir in red curry paste and cook another minute, letting it toast in the oil.</div></div>
-      <div class="pw-step" data-i="2"><div class="pw-num" id="n2">03</div><div class="pw-step-txt" id="t2"><span class="pw-step-lbl" id="l2"></span>Pour in crushed tomatoes and stir to combine. Simmer 5 minutes.</div></div>
-      <div class="pw-step" data-i="3"><div class="pw-num" id="n3">04</div><div class="pw-step-txt" id="t3"><span class="pw-step-lbl" id="l3"></span>Add coconut milk and brown sugar. Stir well and simmer 10 minutes until slightly thickened.</div></div>
-      <div class="pw-step" data-i="4"><div class="pw-num" id="n4">05</div><div class="pw-step-txt" id="t4"><span class="pw-step-lbl" id="l4"></span>Season with salt, ladle into bowls, top with cilantro and chili flakes. Serve immediately.</div></div>
-    </div>
-  </div>
+<div class="results-bar">
+  <div class="results-count" id="count">6 recipes</div>
 </div>
 
-<div class="pw-footer">
-  <button class="pw-shuffle">— shuffle recipe + playlist →</button>
+<div class="grid" id="grid">
+  <a class="card" href="index.html" data-mood="upbeat" data-name="spicy coconut tomato soup" data-desc="bright bold surprising fast weeknight">
+    <img class="card-img" src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=360&fit=crop&q=75" alt="Spicy Coconut Tomato Soup" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag upbeat">upbeat</span>
+      <div class="card-name">Spicy Coconut Tomato Soup</div>
+      <div class="card-desc">Bright, bold, and a little surprising. Ready in 25 minutes.</div>
+      <div class="card-meta"><span class="card-time">25 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="card" href="#" data-mood="cozy" data-name="french onion soup" data-desc="slow warm rich classic cheese">
+    <img class="card-img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=360&fit=crop&q=75" alt="French Onion Soup" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag cozy">cozy</span>
+      <div class="card-name">French Onion Soup</div>
+      <div class="card-desc">Slow-cooked, deeply rich, and worth every minute.</div>
+      <div class="card-meta"><span class="card-time">55 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="card" href="#" data-mood="romantic" data-name="spaghetti aglio e olio" data-desc="elegant simple pasta garlic oil">
+    <img class="card-img" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=360&fit=crop&q=75" alt="Spaghetti Aglio e Olio" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag romantic">romantic</span>
+      <div class="card-name">Spaghetti Aglio e Olio</div>
+      <div class="card-desc">Elegant, simple, ready before the candles burn down.</div>
+      <div class="card-meta"><span class="card-time">20 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="card" href="#" data-mood="focus" data-name="chicken rice meal prep" data-desc="clean efficient batch weekly prep">
+    <img class="card-img" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&h=360&fit=crop&q=75" alt="Chicken Rice Meal Prep" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag focus">focus</span>
+      <div class="card-name">Chicken + Rice Meal Prep</div>
+      <div class="card-desc">Clean, efficient, covers you for the whole week.</div>
+      <div class="card-meta"><span class="card-time">40 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="card" href="#" data-mood="upbeat" data-name="crispy shrimp tacos" data-desc="crunchy fast fun weeknight taco">
+    <img class="card-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&h=360&fit=crop&q=75" alt="Crispy Shrimp Tacos" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag upbeat">upbeat</span>
+      <div class="card-name">Crispy Shrimp Tacos</div>
+      <div class="card-desc">Fast, crunchy, and impossible not to dance while making.</div>
+      <div class="card-meta"><span class="card-time">20 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <a class="card" href="#" data-mood="cozy" data-name="mushroom risotto" data-desc="earthy creamy comfort sunday rice">
+    <img class="card-img" src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&h=360&fit=crop&q=75" alt="Mushroom Risotto" loading="lazy" onerror="this.style.display='none'" />
+    <div class="card-body">
+      <span class="card-tag cozy">cozy</span>
+      <div class="card-name">Mushroom Risotto</div>
+      <div class="card-desc">Earthy, creamy, the ultimate Sunday comfort food.</div>
+      <div class="card-meta"><span class="card-time">35 min</span><span class="card-arrow">→</span></div>
+    </div>
+  </a>
+  <div class="empty" id="empty">no recipes found — try a different search or mood</div>
 </div>
+
+<footer class="footer">
+  <div class="footer-logo">plate<span>wave</span></div>
+  <div class="footer-note" id="footer-note">6 recipes · 4 moods</div>
+</footer>
 
 <script>
-const moods = {
-  cozy:     { title: 'Cozy kitchen energy',     desc: 'Warm, slow, and unhurried — like a Sunday afternoon with nowhere to be.',               playlist: '37i9dQZF1DX889U0CL85jj' },
-  upbeat:   { title: 'Upbeat kitchen energy',   desc: 'Bright and bouncy tracks to match the sizzle. Turn it up.',                            playlist: '37i9dQZF1EVJHK7Q1TBABQ' },
-  romantic: { title: 'Romantic kitchen energy', desc: 'Smooth, warm, and a little candlelit — perfect for cooking for someone special.',        playlist: '37i9dQZF1DX9uKNf5jGX6m' },
-  focus:    { title: 'Focus kitchen energy',    desc: 'Clean and minimal, no lyrics — let the music fade into the background.',                 playlist: '37i9dQZF1DWZeKCadgRdKQ' },
-};
-const player    = document.getElementById('spotify-player');
-const vibeTitle = document.getElementById('vibe-title');
-const vibeDesc  = document.getElementById('vibe-desc');
-const wrap      = document.getElementById('spotify-wrap');
-document.querySelectorAll('.pw-pill').forEach(pill => {
+let activeMood = 'all';
+document.querySelectorAll('.pill').forEach(pill => {
   pill.addEventListener('click', () => {
-    const mood = pill.dataset.mood;
-    const data = moods[mood];
-    if (!data) return;
-    document.querySelectorAll('.pw-pill').forEach(p => p.classList.remove('active'));
+    activeMood = pill.dataset.mood;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
     pill.classList.add('active');
-    vibeTitle.textContent = data.title;
-    vibeDesc.textContent  = data.desc;
-    wrap.classList.add('loading');
-    player.src = `https://open.spotify.com/embed/playlist/${data.playlist}?utm_source=generator&theme=0`;
-    player.onload = () => wrap.classList.remove('loading');
+    filter();
   });
 });
-let active = 0;
-const total = 5;
-function render() {
-  for (let i = 0; i < total; i++) {
-    const n = document.getElementById('n'+i);
-    const t = document.getElementById('t'+i);
-    const l = document.getElementById('l'+i);
-    if (i < active)        { n.className='pw-num done';   t.className='pw-step-txt done'; if(l) l.textContent=''; }
-    else if (i === active) { n.className='pw-num active'; t.className='pw-step-txt';      if(l) l.textContent='Now'; }
-    else                   { n.className='pw-num';        t.className='pw-step-txt';      if(l) l.textContent=''; }
-  }
+document.getElementById('search').addEventListener('input', filter);
+function filter() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.card');
+  let shown = 0;
+  cards.forEach(card => {
+    const moodOk   = activeMood === 'all' || card.dataset.mood === activeMood;
+    const searchOk = !q || card.dataset.name.includes(q) || card.dataset.desc.includes(q);
+    const visible  = moodOk && searchOk;
+    card.style.display = visible ? '' : 'none';
+    if (visible) shown++;
+  });
+  document.getElementById('count').textContent = shown + ' recipe' + (shown !== 1 ? 's' : '');
+  document.getElementById('footer-note').textContent = shown + ' recipes · 4 moods';
+  document.getElementById('empty').style.display = shown === 0 ? 'block' : 'none';
 }
-document.querySelectorAll('.pw-step').forEach(s => {
-  s.addEventListener('click', () => {
-    const i = parseInt(s.dataset.i);
-    active = (i === active && active < total-1) ? active+1 : i;
-    render();
-  });
-});
 </script>
 </body>
 </html>
