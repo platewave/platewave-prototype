@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platewave — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+:root {
+  --paper:  #f5f0e6;
+  --paper2: #f0ebe0;
+  --bg:     #d8d3c8;
+  --ink:    #1c1814;
+  --ink2:   #7a7068;
+  --ink3:   #9a9088;
+  --rule:   #d0c8b8;
+  --rule2:  #e8e0d4;
+  --gold:   #c8a96e;
+  --terra:  #8b4a2a;
+  --brown:  #8b7355;
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Times New Roman', Times, serif;
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── NAV ── */
+.nav {
+  background: var(--ink);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+.logo { font-size: 18px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; }
+.logo span { color: var(--gold); font-style: italic; font-weight: 400; }
+.nav-tag { font-family: 'Inconsolata', monospace; font-size: 9px; color: #6a6058; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid #3a3530; padding: 3px 9px; }
+
+/* ── HERO ── */
+.hero {
+  flex: 1;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.hero-kicker {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  color: var(--brown);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-kicker::before,
+.hero-kicker::after { content: ''; width: 40px; height: 1px; background: var(--rule); }
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+.hero-title em { font-style: italic; color: var(--terra); }
+
+.hero-rule { width: 48px; height: 2px; background: var(--gold); margin: 20px auto; }
+
+.hero-sub {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink2);
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: 40px;
+}
+
+/* ── EMAIL FORM ── */
+.form-row {
+  display: flex;
+  gap: 0;
+  max-width: 380px;
+  width: 100%;
+}
+.email-input {
+  flex: 1;
+  background: var(--paper2);
+  border: 1px solid var(--rule);
+  border-right: none;
+  color: var(--ink);
+  font-family: 'Inconsolata', monospace;
+  font-size: 11px;
+  padding: 10px 14px;
+  outline: none;
+  letter-spacing: 0.5px;
+}
+.email-input::placeholder { color: var(--ink3); }
+.email-input:focus { border-color: var(--brown); }
+.email-btn {
+  background: var(--ink);
+  color: var(--gold);
+  border: 1px solid var(--ink);
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  padding: 10px 18px;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.12s;
+}
+.email-btn:hover { background: var(--terra); border-color: var(--terra); }
+.form-note { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); margin-top: 8px; letter-spacing: 0.5px; }
+.form-thanks { font-family: 'Inconsolata', monospace; font-size: 10px; color: var(--brown); letter-spacing: 1px; display: none; }
+
+/* ── PREVIEW STRIP ── */
+.preview {
+  background: var(--paper2);
+  border-top: 1px solid var(--rule);
+  border-bottom: 2px solid var(--ink);
+  padding: 20px 24px;
+}
+.preview-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 9px;
+  color: var(--ink3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.preview-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+.preview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  max-width: 700px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) { .preview-cards { grid-template-columns: 1fr; } }
+
+.preview-card {
+  background: var(--paper);
+  padding: 12px 14px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.preview-card:hover { background: var(--rule2); }
+.preview-tag { font-family: 'Inconsolata', monospace; font-size: 8px; color: var(--terra); letter-spacing: 1px; text-transform: uppercase; }
+.preview-tag.cozy { color: #6d3a8a; }
+.preview-tag.romantic { color: #9b3060; }
+.preview-card-name { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.preview-card-time { font-family: 'Inconsolata', monospace; font-size: 9px; color: var(--ink3); margin-top: 2px; }
+.preview-arrow { font-size: 10px; color: var(--rule); margin-top: 2px; font-style: italic; }
+.preview-card:hover .preview-arrow { color: var(--terra); }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--ink);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 3px solid var(--gold);
+  flex-shrink: 0;
+}
+.footer-logo { font-size: 12px; font-weight: 700; color: var(--paper); letter-spacing: 1px; text-transform: uppercase; opacity: 0.3; }
+.footer-logo span { color: var(--gold); font-style: italic; font-weight: 400; }
+.footer-note { font-family: 'Inconsolata', monospace; font-size: 9px; color: #3a3530; letter-spacing: 1px; text-transform: uppercase; }
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 32px; }
+  .form-row { flex-direction: column; }
+  .email-input { border-right: 1px solid var(--rule); border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo">plate<span>wave</span></div>
+  <div class="nav-tag">coming soon</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-kicker">Platewave</div>
+  <div class="hero-title">something<br><em>delicious</em><br>is coming</div>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Recipes paired with playlists that match the vibe. Every dish has a mood. Every mood has a soundtrack.</div>
+
+  <div class="form-row">
+    <input class="email-input" id="email-input" type="email" placeholder="your@email.com" />
+    <button class="email-btn" id="email-btn" onclick="handleSubmit()">notify me</button>
+  </div>
+  <div class="form-note" id="form-note">No spam. Just a heads up when we launch.</div>
+  <div class="form-thanks" id="form-thanks">✓ &nbsp; You're on the list. We'll be in touch.</div>
+</div>
+
+<div class="preview">
+  <div class="preview-label">A few recipes live now</div>
+  <div class="preview-cards">
+    <a class="preview-card" href="recipe_1.html">
+      <span class="preview-tag upbeat">upbeat</span>
+      <div class="preview-card-name">Spicy Coconut Tomato Soup</div>
+      <div class="preview-card-time">25 min</div>
+      <div class="preview-arrow">→</div>
+    </a>
+    <a class="preview-card" href="recipe_3.html">
+      <span class="preview-tag romantic">romantic</span>
+      <div class="preview-card-name">Spaghetti Aglio e Olio</div>
+      <div class="preview-card-time">20 min</div>
+      <div class="preview-arrow">→</div>
+    </a>
+    <a class="preview-card" href="recipe_2.html">
+      <span class="preview-tag cozy">cozy</span>
+      <div class="preview-card-name">French Onion Soup</div>
+      <div class="preview-card-time">55 min</div>
+      <div class="preview-arrow">→</div>
+    </a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">plate<span>wave</span></div>
+  <div class="footer-note">platewave.io</div>
+</footer>
+
+<script>
+function handleSubmit() {
+  const email = document.getElementById('email-input').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('email-input').style.borderColor = 'var(--terra)';
+    return;
+  }
+  document.getElementById('form-row') && (document.querySelector('.form-row').style.display = 'none');
+  document.querySelector('.form-row').style.display = 'none';
+  document.getElementById('form-note').style.display = 'none';
+  document.getElementById('form-thanks').style.display = 'block';
+}
+document.getElementById('email-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleSubmit();
+});
+</script>
+</body>
+</html>
