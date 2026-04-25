@@ -34,15 +34,15 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
-/* NAV */
+/* ── NAV ── */
 .pw-nav {
-  background: #000000;
-  padding: 10px 20px;
+  background: #000;
+  padding: 10px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,7 +51,6 @@ body {
   gap: 12px;
 }
 .pw-logo {
-  font-family: 'DM Sans', sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--text);
@@ -63,7 +62,7 @@ body {
 .pw-pill {
   font-family: 'DM Mono', monospace;
   font-size: 9px;
-  padding: 4px 12px;
+  padding: 3px 10px;
   border: 1px solid var(--border);
   color: var(--muted);
   background: transparent;
@@ -76,76 +75,136 @@ body {
 .pw-pill:hover { border-color: var(--text2); color: var(--text2); }
 .pw-pill.active { border-color: var(--green); color: var(--green); background: var(--green-bg); }
 
-/* HEADER BAND */
-.pw-header-band {
+/* ── MOBILE HEADER — compact strip, scrolls with page ── */
+.pw-mobile-header {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
 }
-.pw-col-vibe { padding: 16px 20px; border-bottom: 1px solid var(--border); }
-.pw-vibe-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.pw-vibe-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
-.pw-vibe-title { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
-.pw-vibe-desc { font-size: 12px; color: var(--text2); line-height: 1.5; font-weight: 300; }
-.pw-col-image { border-bottom: 1px solid var(--border); overflow: hidden; }
-.pw-dish-img { display: block; width: 100%; height: 180px; object-fit: cover; }
-.pw-spotify-wrap.loading { opacity: 0.4; transition: opacity 0.2s; }
 
-/* MAIN */
-.pw-main { flex: 1; overflow-y: auto; padding: 20px 20px 0; }
+.pw-mobile-vibe {
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.pw-vibe-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+.pw-vibe-title { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
+.pw-vibe-desc { display: none; } /* hidden on mobile to save space */
+
+/* Mini Spotify embed on mobile — 80px compact player */
+.pw-mobile-embed iframe {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+/* ── DESKTOP HEADER — hidden on mobile ── */
+.pw-desktop-header { display: none; }
+
+/* ── MAIN — scrolls on mobile ── */
+.pw-main {
+  flex: 1;
+  padding: 18px 18px 0;
+  overflow-y: auto;
+}
+
+.pw-dish-img-mobile {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
 .pw-recipe-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
-.pw-title { font-size: 26px; font-weight: 700; color: var(--text); line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.5px; }
+.pw-title { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.15; margin-bottom: 5px; letter-spacing: -0.5px; }
 .pw-desc { font-size: 13px; color: var(--text2); line-height: 1.6; font-weight: 300; margin-bottom: 16px; }
 
-.pw-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-bottom: 24px; background: var(--border); border-radius: 8px; overflow: hidden; }
-.pw-stat { background: var(--bg2); padding: 12px 8px; text-align: center; }
-.pw-stat-val { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; color: var(--green); display: block; margin-bottom: 3px; }
+.pw-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-bottom: 22px; background: var(--border); border-radius: 8px; overflow: hidden; }
+.pw-stat { background: var(--bg2); padding: 11px 8px; text-align: center; }
+.pw-stat-val { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--green); display: block; margin-bottom: 2px; }
 .pw-stat-lbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--text2); letter-spacing: 1px; text-transform: uppercase; }
 
 .pw-section { margin-bottom: 20px; }
 .pw-slabel { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 2px; color: var(--text2); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 .pw-slabel::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-.pw-ing { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.pw-ing { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
 .pw-ing:last-child { border-bottom: none; }
 .pw-ing-name { color: var(--text); font-weight: 400; }
 .pw-ing-qty { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text2); }
 
 .pw-steps { display: flex; flex-direction: column; }
-.pw-step { display: flex; align-items: flex-start; cursor: pointer; padding: 12px 0; border-bottom: 1px solid var(--border); gap: 14px; transition: all 0.1s; }
+.pw-step { display: flex; align-items: flex-start; cursor: pointer; padding: 11px 0; border-bottom: 1px solid var(--border); gap: 13px; transition: padding-left 0.1s; }
 .pw-step:last-child { border-bottom: none; }
 .pw-step:hover { padding-left: 4px; }
 .pw-num { min-width: 26px; height: 26px; border: 1px solid var(--border); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; border-radius: 50%; }
 .pw-num.active { border-color: var(--green); color: var(--green); background: var(--green-bg); }
 .pw-num.done { border-color: var(--border); color: var(--border); }
-.pw-step-txt { font-size: 13px; line-height: 1.7; color: var(--text); padding-top: 4px; font-weight: 300; }
+.pw-step-txt { font-size: 13px; line-height: 1.7; color: var(--text); padding-top: 3px; font-weight: 300; }
 .pw-step-txt.done { color: var(--muted); text-decoration: line-through; }
-.pw-step-lbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--green); display: block; margin-bottom: 3px; letter-spacing: 1px; text-transform: uppercase; }
+.pw-step-lbl { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--green); display: block; margin-bottom: 2px; letter-spacing: 1px; text-transform: uppercase; }
 
-/* FOOTER */
-.pw-footer { padding: 14px 20px; border-top: 1px solid var(--border); flex-shrink: 0; background: #000; }
-.pw-shuffle { width: 100%; padding: 12px; border: 1px solid var(--border); background: transparent; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--text2); cursor: pointer; letter-spacing: 0.5px; transition: all 0.15s; border-radius: 4px; }
+/* ── FOOTER ── */
+.pw-footer { padding: 14px 18px; border-top: 1px solid var(--border); flex-shrink: 0; background: #000; }
+.pw-shuffle { width: 100%; padding: 11px; border: 1px solid var(--border); background: transparent; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--text2); cursor: pointer; letter-spacing: 0.5px; transition: all 0.15s; border-radius: 4px; }
 .pw-shuffle:hover { border-color: var(--green); color: var(--green); background: var(--green-bg); }
 
-/* DESKTOP */
+/* ── DESKTOP — 768px+ ── */
 @media (min-width: 768px) {
   body { overflow: hidden; height: 100vh; }
-  .pw-main { overflow-y: auto; }
 
-  .pw-header-band { display: grid; grid-template-columns: 1fr 1fr 1fr; height: 232px; }
-  .pw-col-vibe {
-    border-bottom: none; border-right: 1px solid var(--border);
-    padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; gap: 8px; height: 100%;
+  /* hide mobile header + mobile image */
+  .pw-mobile-header { display: none; }
+  .pw-dish-img-mobile { display: none; }
+
+  /* show desktop three-column header */
+  .pw-desktop-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 232px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
-  .pw-col-image { border-bottom: none; border-right: 1px solid var(--border); height: 232px; overflow: hidden; }
-  .pw-dish-img { width: 100%; height: 232px; object-fit: cover; }
+
+  .pw-col-vibe {
+    border-right: 1px solid var(--border);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    height: 100%;
+  }
+  .pw-vibe-title-d { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
+  .pw-vibe-desc-d { font-size: 12px; color: var(--text2); line-height: 1.5; font-weight: 300; }
+  .pw-vibe-dot-d { width: 7px; height: 7px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+  .pw-vibe-row-d { display: flex; align-items: center; gap: 8px; }
+
+  .pw-col-image {
+    border-right: 1px solid var(--border);
+    height: 232px;
+    overflow: hidden;
+  }
+  .pw-dish-img-desktop {
+    display: block;
+    width: 100%;
+    height: 232px;
+    object-fit: cover;
+  }
+
   .pw-col-embed { height: 232px; overflow: hidden; }
   .pw-col-embed iframe { display: block; width: 100%; height: 232px; }
 
-  .pw-main { padding: 24px 32px 0; }
+  /* scrollable main */
+  .pw-main { overflow-y: auto; padding: 24px 32px 0; }
   .pw-footer { padding: 14px 32px; }
   .pw-title { font-size: 30px; }
 }
+
 @media (min-width: 1200px) {
   .pw-main { padding: 28px 48px 0; }
   .pw-footer { padding: 14px 48px; }
@@ -153,13 +212,13 @@ body {
 }
 @media (min-width: 1600px) {
   .pw-main { padding: 32px 64px 0; }
-  .pw-footer { padding: 14px 64px; }
   .pw-title { font-size: 38px; }
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <div class="pw-nav">
   <a href="index.html" class="pw-logo">plate<span>wave</span></a>
   <div class="pw-moods">
@@ -170,36 +229,57 @@ body {
   </div>
 </div>
 
-<div class="pw-header-band">
-  <div class="pw-col-vibe">
-    <div class="pw-vibe-row">
-      <div class="pw-vibe-dot"></div>
-      <div class="pw-vibe-title" id="vibe-title">romantic vibes</div>
-    </div>
-    <div class="pw-vibe-desc" id="vibe-desc">Smooth, warm, and a little candlelit — perfect for cooking for someone special.</div>
+<!-- MOBILE HEADER: compact vibe strip + mini embed, scrolls with page -->
+<div class="pw-mobile-header">
+  <div class="pw-mobile-vibe">
+    <div class="pw-vibe-dot"></div>
+    <div class="pw-vibe-title" id="vibe-title-m">romantic vibes</div>
   </div>
-  <div class="pw-col-image">
-    <img class="pw-dish-img" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=900&h=500&fit=crop&q=85" alt="Spaghetti Aglio e Olio" onerror="this.parentElement.style.display='none'" />
-  </div>
-  <div class="pw-col-embed">
-    <div class="pw-spotify-wrap" id="spotify-wrap">
-      <iframe id="spotify-player" style="border-radius:0;display:block;"
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9uKNf5jGX6m?utm_source=generator&theme=0"
-        width="100%" height="232" frameBorder="0" allowfullscreen
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+  <div class="pw-mobile-embed">
+    <iframe id="spotify-player-m" style="border-radius:0;"
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9uKNf5jGX6m?utm_source=generator&theme=0"
+      width="100%" height="80" frameBorder="0" allowfullscreen
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
 </div>
 
+<!-- DESKTOP HEADER: three columns, fixed height -->
+<div class="pw-desktop-header">
+  <div class="pw-col-vibe">
+    <div class="pw-vibe-row-d">
+      <div class="pw-vibe-dot-d"></div>
+      <div class="pw-vibe-title-d" id="vibe-title-d">romantic vibes</div>
+    </div>
+    <div class="pw-vibe-desc-d" id="vibe-desc-d">Smooth, warm, and a little candlelit — perfect for cooking for someone special.</div>
+  </div>
+  <div class="pw-col-image">
+    <img class="pw-dish-img-desktop" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=900&h=500&fit=crop&q=85" alt="Spaghetti Aglio e Olio" onerror="this.parentElement.style.display='none'" />
+  </div>
+  <div class="pw-col-embed">
+    <iframe id="spotify-player-d" style="border-radius:0;display:block;"
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9uKNf5jGX6m?utm_source=generator&theme=0"
+      width="100%" height="232" frameBorder="0" allowfullscreen
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+</div>
+
+<!-- MAIN -->
 <div class="pw-main">
+  <!-- dish image — mobile only, scrolls with content -->
+  <img class="pw-dish-img-mobile"
+    src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=900&h=500&fit=crop&q=85" alt="Spaghetti Aglio e Olio"
+    onerror="this.style.display='none'" />
+
   <div class="pw-recipe-label">Recipe</div>
   <div class="pw-title">Spaghetti Aglio e Olio</div>
   <div class="pw-desc">Elegant, simple, and ready before the candles burn down. The Italian answer to dinner for two.</div>
+
   <div class="pw-stats">
     <div class="pw-stat"><span class="pw-stat-val">5 min</span><span class="pw-stat-lbl">Prep</span></div>
     <div class="pw-stat"><span class="pw-stat-val">15 min</span><span class="pw-stat-lbl">Cook</span></div>
     <div class="pw-stat"><span class="pw-stat-val">2</span><span class="pw-stat-lbl">Serves</span></div>
   </div>
+
   <div class="pw-section">
     <div class="pw-slabel">Ingredients</div>
     <div class="pw-ing"><span class="pw-ing-name">Spaghetti</span><span class="pw-ing-qty">200g</span></div>
@@ -210,6 +290,7 @@ body {
         <div class="pw-ing"><span class="pw-ing-name">Parmesan, finely grated</span><span class="pw-ing-qty">to serve</span></div>
         <div class="pw-ing"><span class="pw-ing-name">Salt + black pepper</span><span class="pw-ing-qty">to taste</span></div>
   </div>
+
   <div class="pw-section">
     <div class="pw-slabel">Steps</div>
     <div class="pw-steps">
@@ -228,15 +309,18 @@ body {
 
 <script>
 const moods = {
-  cozy:     { title: 'cozy vibes',     desc: 'Warm, slow, and unhurried — like a Sunday afternoon with nowhere to be.',               playlist: '37i9dQZF1DX889U0CL85jj' },
-  upbeat:   { title: 'upbeat energy',  desc: 'Bright and bouncy tracks to match the sizzle. Turn it up.',                            playlist: '37i9dQZF1EVJHK7Q1TBABQ' },
-  romantic: { title: 'romantic vibes', desc: 'Smooth, warm, and a little candlelit — perfect for cooking for someone special.',        playlist: '37i9dQZF1DX9uKNf5jGX6m' },
-  focus:    { title: 'focus mode',     desc: 'Clean and minimal, no lyrics — let the music fade into the background.',                 playlist: '37i9dQZF1DWZeKCadgRdKQ' },
+  cozy:     { title: 'cozy vibes',     desc: 'Warm, slow, and unhurried — like a Sunday afternoon with nowhere to be.',    playlist: '37i9dQZF1DX889U0CL85jj' },
+  upbeat:   { title: 'upbeat energy',  desc: 'Bright and bouncy tracks to match the sizzle. Turn it up.',                 playlist: '37i9dQZF1EVJHK7Q1TBABQ' },
+  romantic: { title: 'romantic vibes', desc: 'Smooth, warm, and candlelit — perfect for cooking for someone special.',    playlist: '37i9dQZF1DX9uKNf5jGX6m' },
+  focus:    { title: 'focus mode',     desc: 'Clean and minimal, no lyrics — let the music fade into the background.',    playlist: '37i9dQZF1DWZeKCadgRdKQ' },
 };
-const player = document.getElementById('spotify-player');
-const vibeTitle = document.getElementById('vibe-title');
-const vibeDesc  = document.getElementById('vibe-desc');
-const wrap      = document.getElementById('spotify-wrap');
+
+const playerM = document.getElementById('spotify-player-m');
+const playerD = document.getElementById('spotify-player-d');
+const vtM = document.getElementById('vibe-title-m');
+const vtD = document.getElementById('vibe-title-d');
+const vdD = document.getElementById('vibe-desc-d');
+
 document.querySelectorAll('.pw-pill').forEach(pill => {
   pill.addEventListener('click', () => {
     const mood = pill.dataset.mood;
@@ -244,14 +328,16 @@ document.querySelectorAll('.pw-pill').forEach(pill => {
     if (!data) return;
     document.querySelectorAll('.pw-pill').forEach(p => p.classList.remove('active'));
     pill.classList.add('active');
-    vibeTitle.textContent = data.title;
-    vibeDesc.textContent  = data.desc;
-    wrap.classList.add('loading');
-    player.src = `https://open.spotify.com/embed/playlist/${data.playlist}?utm_source=generator&theme=0`;
-    player.onload = () => wrap.classList.remove('loading');
+    const src = `https://open.spotify.com/embed/playlist/${data.playlist}?utm_source=generator&theme=0`;
+    vtM.textContent = data.title;
+    if (vtD) vtD.textContent = data.title;
+    if (vdD) vdD.textContent = data.desc;
+    playerM.src = src;
+    if (playerD) playerD.src = src;
     gtag('event', 'mood_switch', {mood: mood, recipe: 'Spaghetti Aglio e Olio'});
   });
 });
+
 let active = 0;
 const total = 5;
 function render() {
